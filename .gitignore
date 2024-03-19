@@ -1,0 +1,10 @@
+.idea
+
+/projects/*
+!/projects/html
+
+/nginx/conf.d/*
+!/nginx/conf.d/default.conf
+!/nginx/conf.d/example.conf
+
+/nginx/log/**

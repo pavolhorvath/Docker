@@ -1,0 +1,35 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/log:/var/log/nginx
+
+  webs:
+    build: ./webs
+    container_name: webs
+    volumes:
+      - ./projects:/var/www
+
+  mysql:
+    image: mysql:8.3
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+    volumes:
+      - mysqldata:/var/lib/mysql
+
+  redis:
+    image: redis:latest
+    container_name: redis
+
+volumes:
+  mysqldata:
